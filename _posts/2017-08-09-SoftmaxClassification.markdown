@@ -44,4 +44,4 @@ $$C(H(x),y) = ylog(H(x)) - (1-y)log(1-h(x))$$
 
 
 # Gradient Descent Algorithm
-...
+* Tensorflow에서의 Cost함수 선언 시에 내부적으로 Back propagatino이 자동으로 구성됨.

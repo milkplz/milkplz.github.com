@@ -10,7 +10,9 @@ categories: jekyll update
 
 # Hypothesis
 * Linear regression에 사용되었던 Hypothesis인 $$H(x) = Wx$$의 식은 $$\hat{y}$$이 실수로 나오며 이 실수는 무한 범위 이기 때문에 Logistic Regression의 0과 1의 분류 문제에는 맞지 않다. 
-그래서 $$\hat{y}$$이 0~1의 값을 갖도로 하는 식을 이용한다. 그것이 바로 sigmoid함수. 이 함수는 logistic 함수라고도 불린다. sigmoid를 S(x)라고 H(x)를 G(x)라고 정의하면 아래와 같다.<br>
+그래서 $$\hat{y}$$이 0~1의 값을 갖도로 하는 식을 이용한다. 그것이 바로 $$sigmoid$$함수. 이 함수는 logistic 함수라고도 불린다. sigmoid를 S(x)라고 H(x)를 G(x)라고 정의하면 아래와 같다.<br>
+* 정리
+    * $$H(X) = XW + b$$의 함수를 atication function인 $$sigmoid$$ 넣어준다.
 $$H(x) = S(G(x))$$<br>
 $$H(x) = \frac{1}{1+e^{-G(x)}}$$<br>
 $$H(x) = \frac{1}{1+e^{-W^tX}}$$
@@ -23,3 +25,4 @@ $$COST(W) = \sum_{m}^1 C(H(x), y)$$
 # Gradient Descent Algorithm
 $$W := W - α\frac{δ}{δW}cost(W)$$ <br>
 α는 learning_rate 이다.
+* Tensorflow에서의 Cost함수 선언 시에 내부적으로 Back propagatino이 자동으로 구성됨.
