@@ -49,7 +49,7 @@ categories: jekyll update
     * Regularization
 
 * Dropout
-    * random하게 몇 개의 neurun을 disable 시켜서 모델들을 학습시키고, 마지막에 모든 neurun을 써서 학습을 시킨다.
+    * random하게 몇 개의 neurun을 disable 시켜서 모델들을 학습시키고, test나 predict시에만 모든 neurun을 써서 결과값을 뽑아낸다.
     * 상당히 결과가 좋음
     * 학습할 떄만 Dropout 시킴
 
