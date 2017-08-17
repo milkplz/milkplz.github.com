@@ -12,5 +12,28 @@ categories: jekyll update
         * 가장 높은 값을 추출
     * stride
         * filter가 움직이는 거리
-![Max Pooling]({{ site.url }}/assets/img/20170818/maxpooling.PNG)
-![sampling]({{ site.url }}/assets/img/20170818/sampling.PNG)
+![Max Pooling]({{ site.url }}/assets/img/20170818/maxpooling.png)
+![sampling]({{ site.url }}/assets/img/20170818/sampling.png)
+
+* FC Layer
+![fclayer]({{ site.url }}/assets/img/20170818/fclayer.png)
+
+* CNN case
+    * LeNet
+    * AlexNet
+    * GoogLeNet
+    * ResNet
+        * 깊은 layer를 극복하기 위해 FastForward
+
+    * for Sentence Classfication
+    * DeepMind's AlphaGo
+
+![LeNet]({{ site.url }}/assets/img/20170818/lenet.png)
+![AlexNet]({{ site.url }}/assets/img/20170818/alexnet00.png)
+![AlexNet]({{ site.url }}/assets/img/20170818/alexnet01.png)
+![AlexNet]({{ site.url }}/assets/img/20170818/alexnet02.png)
+![GoogLeNet]({{ site.url }}/assets/img/20170818/googlenet.png)
+![ResNet]({{ site.url }}/assets/img/20170818/renet00.png)
+![ResNet]({{ site.url }}/assets/img/20170818/renet01.png)
+![ResNet]({{ site.url }}/assets/img/20170818/renet02.png)
+![ResNet]({{ site.url }}/assets/img/20170818/renet03.png)
