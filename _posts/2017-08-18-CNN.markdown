@@ -1,0 +1,16 @@
+---
+layout: post
+title:  "Convolution Neural Networks"
+date:   2017-08-18 06:57:48 +0900
+categories: jekyll update
+---
+
+* Pooling layer
+    * 간단하게 sampling라고 할 수 있음.
+    * conv layer에서 하나의 layer를 뽑아내어 resize한다. 그리고 sampling(resize)한 layer를 다시 conv layer로 합친다.
+    * MAX POOLING
+        * 가장 높은 값을 추출
+    * stride
+        * filter가 움직이는 거리
+![Max Pooling]({{ site.url }}/assets/img/20170818/maxpooling.PNG)
+![sampling]({{ site.url }}/assets/img/20170818/sampling.PNG)

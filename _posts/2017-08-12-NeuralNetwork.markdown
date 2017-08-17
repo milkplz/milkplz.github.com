@@ -18,12 +18,13 @@ categories: jekyll update
 두 개의 유닛(LogisticRegression)으로 구성된 Neural Network 네트웍으로 해결할 수 있다.
 ![xor]({{ site.url }}/assets/img/20170812/xor.PNG)
 
-* Neural Network 가 초기에 중단되었던 문제 극복
+* Neural Network 가 초기에 중단되었던 문제 극복 (현재도 계속 연구가 진행되고 있는 영)
     * Back propagation 한계
         * sigmoid를 ReLU(또는 다른 알고리즘)대채하여 극복
     * weight 설정 문제
         * 초기에 weight이 잘 설정되지 않으면 학습이 잘 되지 않는 문제
-        
+            * Xaivier/He initialization
+
 * Back propagation(chanin rule)
     * 개요
         * 편미분과 체인룰을 이용하여 각각 영향을 미치는 값을 계산 
@@ -42,3 +43,15 @@ categories: jekyll update
 ![relu]({{ site.url }}/assets/img/20170812/relu.PNG)
 ![chart]({{ site.url }}/assets/img/20170812/chart.PNG)
 ![func]({{ site.url }}/assets/img/20170812/func.PNG)
+
+* overfitting
+    * More training data!
+    * Regularization
+
+* Dropout
+    * random하게 몇 개의 neurun을 disable 시켜서 모델들을 학습시키고, 마지막에 모든 neurun을 써서 학습을 시킨다.
+    * 상당히 결과가 좋음
+    * 학습할 떄만 Dropout 시킴
+
+* Ensemble
+    * 

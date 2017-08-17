@@ -1,0 +1,6 @@
+---
+layout: post
+title:  "Recurrent Neural Networks"
+date:   2017-08-18 06:57:48 +0900
+categories: jekyll update
+---
