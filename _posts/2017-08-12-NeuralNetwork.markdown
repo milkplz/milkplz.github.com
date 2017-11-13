@@ -18,7 +18,7 @@ categories: jekyll update
 두 개의 유닛(LogisticRegression)으로 구성된 Neural Network 네트웍으로 해결할 수 있다.
 ![xor]({{ site.url }}/assets/img/20170812/xor.PNG)
 
-* Neural Network 가 초기에 중단되었던 문제 극복 (현재도 계속 연구가 진행되고 있는 영)
+* 초기 Neural Network 겪었던 문제 (현재도 계속 연구가 진행되고 있는 영역)
     * Back propagation 한계
         * sigmoid를 ReLU(또는 다른 알고리즘)대채하여 극복
     * weight 설정 문제
@@ -39,7 +39,7 @@ categories: jekyll update
 * sigmoid는 activation function으로 불림. sigmoid가 0~1로 출력하여 다음 뉴런으로 값의 전달여부를 결정하기 때문.
 
 * ReLU : Rectified Linear Unit
-    * 
+    * Back propagation에서 sigmoid는 결과값이 0~1로 나오는데 0에 가까운 값들로 인해 뒤로가 갈수록 weight가 업데이트되지 않는 문제가 발생한다. 그리하여 나온것이 ReLU
 ![relu]({{ site.url }}/assets/img/20170812/relu.PNG)
 ![chart]({{ site.url }}/assets/img/20170812/chart.PNG)
 ![func]({{ site.url }}/assets/img/20170812/func.PNG)
@@ -54,4 +54,4 @@ categories: jekyll update
     * 학습할 떄만 Dropout 시킴
 
 * Ensemble
-    * 
+    * 여러개의 학습된 모델의 결과값을 어떠한 기준을 통해 최상의 결과값을 뽑아낸다 (투표등등)

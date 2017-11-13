@@ -1,0 +1,16 @@
+---
+layout: post
+title:  "R-CNN(Regions with CNN features)"
+date:   2017-08-18 06:57:48 +0900
+categories: jekyll update
+---
+
+* 동작방식
+    * 입력 영상으로부터 2000개의 후보영역 만듬 (Selective Search를 사용)
+    * 해당영역을 warping이나 crop을 통해 224x224 크기로 만듬.
+    * CNN에 인가하여 CNN feature vector를 얻음
+    * Linear SVM을 이용해 해당 영역을 분류
+
+* Selective Search for Object Recognition
+
+작성 중...

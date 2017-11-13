@@ -1,0 +1,126 @@
+---
+layout: post
+title:  "MVC"
+date:   2017-11-12 06:57:48 +0900
+categories: jekyll update
+---
+
+# MVC
+## MVC 패턴은 모델 - 뷰 - 컨트롤러 패턴을 나타낸다.
+* Model - 모델은 데이터를 운반하는 객체 또는 JAJO POJO를 나타냅니다. 또한 데이터가 변경되면 컨트롤러를 업데이트하는 로직을 가질 수 있습니다.
+* View - 보기는 모델에 포함 된 데이터의 시각화를 나타냅니다.
+* Controller - Controller는 Model과 View 모두에서 작동합니다. Model 객체로의 데이터 흐름을 제어하고 데이터가 변경 될 때마다 View를 업데이트합니다. View와 Model을 분리하여 유지합니다.
+
+## Model
+
+Student.java
+```java
+public class Student {
+   private String rollNo;
+   private String name;
+   
+   public String getRollNo() {
+      return rollNo;
+   }
+   
+   public void setRollNo(String rollNo) {
+      this.rollNo = rollNo;
+   }
+   
+   public String getName() {
+      return name;
+   }
+   
+   public void setName(String name) {
+      this.name = name;
+   }
+}
+```
+
+## View
+StudentView.java
+```java
+public class StudentView {
+   public void printStudentDetails(String studentName, String studentRollNo){
+      System.out.println("Student: ");
+      System.out.println("Name: " + studentName);
+      System.out.println("Roll No: " + studentRollNo);
+   }
+}
+```
+
+## Controller
+StudentController.java
+```java
+public class StudentController {
+   private Student model;
+   private StudentView view;
+
+   public StudentController(Student model, StudentView view){
+      this.model = model;
+      this.view = view;
+   }
+
+   public void setStudentName(String name){
+      model.setName(name);		
+   }
+
+   public String getStudentName(){
+      return model.getName();		
+   }
+
+   public void setStudentRollNo(String rollNo){
+      model.setRollNo(rollNo);		
+   }
+
+   public String getStudentRollNo(){
+      return model.getRollNo();		
+   }
+
+   public void updateView(){				
+      view.printStudentDetails(model.getName(), model.getRollNo());
+   }	
+}
+```
+
+## Demo
+
+MVCPatternDemo.java
+```java
+public class MVCPatternDemo {
+   public static void main(String[] args) {
+
+      //fetch student record based on his roll no from the database
+      Student model  = retriveStudentFromDatabase();
+
+      //Create a view : to write student details on console
+      StudentView view = new StudentView();
+
+      StudentController controller = new StudentController(model, view);
+
+      controller.updateView();
+
+      //update model data
+      controller.setStudentName("John");
+
+      controller.updateView();
+   }
+
+   private static Student retriveStudentFromDatabase(){
+      Student student = new Student();
+      student.setName("Robert");
+      student.setRollNo("10");
+      return student;
+   }
+}
+```
+
+## Output
+```java
+Student: 
+Name: Robert
+Roll No: 10
+Student: 
+Name: John
+Roll No: 10
+```

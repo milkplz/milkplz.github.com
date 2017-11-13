@@ -1,0 +1,154 @@
+---
+layout: post
+title:  "diForiOS"
+date:   2017-10-07 06:57:48 +0900
+categories: jekyll update
+---
+
+# 참조
+* Applying the dependency injection design pattern to Objective-C or Swift codebases.
+* https://medium.com/square-corner-blog/dependency-injection-give-your-ios-code-a-shot-in-the-arm-ba98594f5002
+
+# 요약
+* Setter보다는 Constructor의 init 메소드의 인수로 전달
+* Block과 Factory Pattern을 활용
+* StoryBoard 사용 자제. xib활용
+* Singleton Object도 모두 init 메소드의 인수로 전달
+* 수정 불가능한 생성자는 Setter사용
+
+### What Is Dependency Injection?
+* 의존성 주입의 개념
+개체는 자신을 생성하기보다는 종속성을 전달해야합니다.
+
+* iOS에서의 Dependencies 설정
+Dependencies는 initializer (또는 "constructor")를 통해 객체에 전달되거나 속성 (또는 "setters")을 통해 객체에 전달 될 수 있습니다. 이들은 일반적으로 "constructor injection"및 "setter injection"이라고합니다.
+
+Constructor Injection
+<pre><code>
+- (instancetype)initWithDependency1:(Dependency1 *)d1 
+                        dependency2:(Dependency2 *)d2;
+</code></pre>
+
+Setter Injection
+<pre><code>
+    @property (nonatomic, retain) Dependency1 *dependency1;
+    @property (nonatomic, retain) Dependency2 *dependency2;
+</code></pre>
+
+### Why Use Dependency Injection?
+* [Clear declaration of dependencies] 개체가 작동하기 위해 무엇이 필요한지 명확 해지고 전역과 같은 위험한 숨겨진 종속성이 사라집니다.
+* [Composition] DI는 상속을 통한 합성을 권장 하므로 코드의 재사용 가능성이 향상됩니다.
+* [Easy customization] 개체를 만들 때 특정 시나리오에 맞게 개체의 일부를 쉽게 사용자 지정할 수 있습니다.
+* [Clear ownership] 특히 생성자 삽입을 사용할 때 객체 소유권 규칙이 엄격하게 적용되어 비순환 객체 지향 그래프 를 만들 수 있습니다.
+* [Testability] 다른 무엇보다 의존성 주입은 객체의 테스트 가능성을 향상시킵니다. 이니셜 라이저를 작성하여 간단하게 작성할 수 있기 때문에 숨겨진 종속성을 관리 할 필요가 없습니다. 또한 종속성을 조롱하여 테스트 대상 객체에 테스트를 집중시키는 것이 간단 해집니다.
+
+### Dependencies Allocated During Initialization
+<pre><code>
+@interface RCRaceCar ()
+@property (nonatomic, readonly) RCEngine *engine;
+@end
+
+@implementation RCRaceCar
+- (instancetype)init
+{
+   ...
+   // Create the engine. Note that it cannot be customized or
+   // mocked out without modifying the internals of RCRaceCar.
+   _engine = [[RCEngine alloc] init];
+   return self;
+}
+@end
+</code></pre>
+simple change
+<pre><code>
+@interface RCRaceCar ()
+@property (nonatomic, readonly) RCEngine *engine;
+@end
+
+@implementation RCRaceCar
+// The engine is created before the race car and passed in
+// as a parameter, and the caller can customize it if desired.
+- (instancetype)initWithEngine:(RCEngine *)engine
+{
+   ...
+   _engine = engine;
+   return self;
+}
+@end
+</code></pre>
+
+### Lazily Initialized Dependencies
+<pre><code>
+@interface RCRaceCar ()
+@property (nonatomic) RCEngine *engine;
+@end
+
+@implementation RCRaceCar
+- (instancetype)initWithEngine:(RCEngine *)engine
+{
+   ...
+   _engine = engine;
+   return self;
+}
+- (void)recoverFromCrash
+{
+   if (self.fire != nil) {
+      RCFireExtinguisher *fireExtinguisher = [[RCFireExtinguisher alloc] init];
+      [fireExtinguisher extinguishFire:self.fire];
+   }
+}
+@end
+</code></pre>
+팩토리는 인수를 필요로하지 않고 객체의 구체적인 인스턴스를 반환하는 표준 Objective-C 블록입니다. 객체는 생성 방법에 대한 세부 사항을 알 필요없이 이러한 블록을 사용하여 종속성이 생성되는시기를 제어 할 수 있습니다.
+다음은 공장을 사용하여 소화기를 만드는 의존성 주입을 사용한 예입니다.
+<pre><code>
+typedef RCFireExtinguisher *(^RCFireExtinguisherFactory)();
+
+@interface RCRaceCar ()
+@property (nonatomic, readonly) RCEngine *engine;
+@property (nonatomic, copy, readonly) RCFireExtinguisherFactory fireExtinguisherFactory;
+@end
+
+@implementation RCRaceCar
+- (instancetype)initWithEngine:(RCEngine *)engine
+       fireExtinguisherFactory:(RCFireExtinguisherFactory)extFactory
+{
+   ...
+   _engine = engine;
+   _fireExtinguisherFactory = [extFactory copy];
+   return self;
+}
+- (void)recoverFromCrash
+{
+   if (self.fire != nil) {
+      RCFireExtinguisher *fireExtinguisher = self.fireExtinguisherFactory();
+      [fireExtinguisher extinguishFire:self.fire];
+   }
+}
+@end
+</code></pre>
+팩토리는 비록 초기화 중에 생성이 이루어진다 할지라도 알려지지 않은 수의 의존성을 생성해야하는 경우에도 유용합니다. 예 :
+<pre><code>
+@implementation RCRaceCar
+- (instancetype)initWithEngine:(RCEngine *)engine 
+                  transmission:(RCTransmission *)transmission
+                  wheelFactory:(RCWheel *(^)())wheelFactory;
+{
+   self = [super init];
+   if (self == nil) {
+      return nil;
+   }
+   _engine = engine;
+   _transmission = transmission;
+   _leftFrontWheel = wheelFactory();
+   _leftRearWheel = wheelFactory();
+   _rightFrontWheel = wheelFactory();
+   _rightRearWheel = wheelFactory();
+   // Keep the wheel factory for later in case we need a spare.
+   _wheelFactory = [wheelFactory copy];
+   return self;
+}
+@end
+</code></pre>
+
+작성 중...

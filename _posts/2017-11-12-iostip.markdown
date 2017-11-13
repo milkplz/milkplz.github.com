@@ -1,0 +1,12 @@
+---
+layout: post
+title:  "iOS Tips"
+date:   2017-11-12 06:57:48 +0900
+categories: jekyll update
+---
+
+# iOS Tip
+
+## Key Value Coding, Key Value Observing
+* http://minsone.github.io/mac/ios/ioskey-value-coding-key-value-observing
+* https://www.appcoda.com/understanding-key-value-observing-coding/

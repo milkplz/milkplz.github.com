@@ -16,7 +16,7 @@ categories: jekyll update
 ![sampling]({{ site.url }}/assets/img/20170818/sampling.png)
 
 * FC Layer
-![fclayer]({{ site.url }}/assets/img/20170818/fclayer.png)
+![fclayer]({{ site.url }}/assets/img/20170818/fclayer.png)...
 
 * CNN case
     * LeNet
