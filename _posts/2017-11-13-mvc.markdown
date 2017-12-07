@@ -124,3 +124,5 @@ Student:
 Name: John
 Roll No: 10
 ```
+
+[원문](https://www.tutorialspoint.com/design_pattern/mvc_pattern.htm)

@@ -1,0 +1,24 @@
+---
+layout: post
+title:  "MVVM"
+date:   2017-11-12 06:57:48 +0900
+categories: jekyll update
+---
+
+# Sinon
+
+## Sinon splits test-doubles into three types:
+
+* <span style="color:red">Spies</span> which offer information about function calls, without affecting their behavior
+* <span style="color:red">Stubs,</span> which are like spies, but completely replace the function. This makes it possible to make a stubbed function do whatever you like — throw an exception, return a specific value, etc
+* <span style="color:red">Mocks,</span> which make replacing whole objects easier by combining both spies and stubs
+In addition, Sinon also provides some other helpers, although these are outside the scope of this article:
+
+In addition, Sinon also provides some other helpers, although these are outside the scope of this article:
+* <span style="color:red">Fake timers,</span> which can be used to travel forwards in time, for example triggering a setTimeout
+* <span style="color:red">Fake XMLHttpRequest and server,</span> which can be used to fake Ajax requests and responses
+
+* 참조링크
+    * [sinon.js](http://sinonjs.org/)
+    * [API documentation - Sinon.JS - v1.17.7](http://sinonjs.org/releases/v1.17.7/)
+    * [Sinon Tutorial: JavaScript Testing with Mocks, Spies & Stubs](https://www.sitepoint.com/sinon-tutorial-javascript-testing-mocks-spies-stubs/)
