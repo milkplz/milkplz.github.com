@@ -1,0 +1,19 @@
+---
+layout: post
+title:  "Gradle"
+date:   2017-12-12 06:57:48 +0900
+categories: jekyll update
+---
+## [Android] Gradle 이란
+Gradle이란 빌드 배포 도구이다.
+
+Android Studio에서 프로젝트를 만들면 Gradle이란 것도 같이 생성된다.
+
+Android Studio는 코드의 편집만을 담당하고, 빌드는 Gradle을 통해 모두 수행된다. (때문에 간호, Android Studio의 프로젝트 설정과 Gradle의 빌드 설정이 Sync되지 않아 Android Studio에서 에러로 표시되는 경우가 있다.)
+
+### build.gradle
+
+모듈의 빌드 방법이 정의된 빌드 스크립트이다.
+* 빌드에 사용할 SDK 버전
+* 애플리케이션 버전
+* 라이브러리 등등
